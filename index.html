@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FreelanceNG — Coming Soon</title>
+<meta name="description" content="FreelanceNG is an AI-powered proposal and profile toolkit built for Nigerian freelancers on Upwork and Fiverr. Currently in development — join the waitlist.">
+<meta property="og:title" content="FreelanceNG — Win More Clients on Upwork & Fiverr">
+<meta property="og:description" content="AI-powered tools built specifically for Nigerian freelancers. Join the waitlist for early access.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0F0F0E;
+  --ink2: #3D3D38;
+  --ink3: #8A8A82;
+  --ink4: #C4C4BB;
+  --surface: #F6F5F0;
+  --white: #FEFEFC;
+  --accent: #1B7A50;
+  --accent-light: #E4F2EB;
+  --accent-mid: #25A96C;
+  --border: rgba(15,15,14,0.08);
+  --border-strong: rgba(15,15,14,0.14);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--white);
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* NAV */
+nav {
+  padding: 0 2rem;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  background: var(--white);
+}
+.logo {
+  font-family: 'Instrument Serif', serif;
+  font-size: 20px;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+.logo-dot {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--accent-mid);
+}
+.nav-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--accent);
+  background: var(--accent-light);
+  border: 1px solid rgba(27,122,80,0.2);
+  padding: 4px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.04em;
+}
+
+/* HERO */
+.hero {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 80px 2rem 64px;
+  text-align: center;
+}
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ink3);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+.hero-eyebrow::before, .hero-eyebrow::after {
+  content: '';
+  display: block;
+  height: 1px;
+  width: 28px;
+  background: var(--border-strong);
+}
+.hero h1 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 60px;
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 1.5rem;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--accent);
+}
+.hero p {
+  font-size: 17px;
+  color: var(--ink2);
+  line-height: 1.75;
+  max-width: 540px;
+  margin: 0 auto 2.5rem;
+}
+.waitlist-form {
+  display: flex;
+  gap: 8px;
+  max-width: 420px;
+  margin: 0 auto;
+}
+.waitlist-form input {
+  flex: 1;
+  height: 48px;
+  padding: 0 16px;
+  border: 1.5px solid var(--border-strong);
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: var(--ink);
+  background: var(--white);
+  outline: none;
+  transition: border-color .15s;
+}
+.waitlist-form input:focus { border-color: var(--accent); }
+.waitlist-form input::placeholder { color: var(--ink4); }
+.waitlist-form button {
+  height: 48px;
+  padding: 0 22px;
+  background: var(--ink);
+  color: var(--white);
+  border: none;
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background .15s, transform .12s;
+}
+.waitlist-form button:hover { background: #222; transform: translateY(-1px); }
+.form-note {
+  font-size: 12px;
+  color: var(--ink4);
+  margin-top: 10px;
+}
+.success-msg {
+  display: none;
+  background: var(--accent-light);
+  border: 1px solid rgba(27,122,80,0.2);
+  border-radius: 10px;
+  padding: 12px 20px;
+  font-size: 14px;
+  color: var(--accent);
+  font-weight: 500;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+/* DEV STATUS */
+.dev-status {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 2rem;
+}
+.dev-status-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.dev-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink2);
+}
+.pulse {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent-mid);
+  position: relative;
+}
+.pulse::after {
+  content: '';
+  position: absolute;
+  top: -4px; left: -4px;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: rgba(37,169,108,0.25);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.3);opacity:0} }
+.progress-track {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.phase-dot {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: var(--ink3);
+}
+.phase-dot.done { color: var(--accent); }
+.phase-dot.active { color: var(--ink); font-weight: 600; }
+.dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--ink4);
+}
+.dot.done { background: var(--accent); }
+.dot.active { background: var(--ink); }
+.phase-sep { color: var(--ink4); font-size: 11px; }
+
+/* FEATURES */
+.features {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 80px 2rem;
+}
+.section-top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.section-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ink3);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+}
+.section-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: 38px;
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.section-title em { font-style: italic; color: var(--accent); }
+.section-note {
+  font-size: 13px;
+  color: var(--ink3);
+  font-family: 'DM Mono', monospace;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.section-note::before {
+  content: '';
+  display: block;
+  width: 20px; height: 1px;
+  background: var(--border-strong);
+}
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.feat {
+  background: var(--white);
+  padding: 1.75rem;
+  position: relative;
+}
+.feat-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--ink4);
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+.feat-icon-wrap {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+  margin-bottom: 1rem;
+}
+.feat-icon-wrap.core { background: var(--accent-light); }
+.feat-icon-wrap.premium { background: #EEEDFE; }
+.feat-tag {
+  display: inline-flex;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  padding: 2px 7px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.feat-tag.core { background: var(--accent-light); color: var(--accent); }
+.feat-tag.premium { background: #EEEDFE; color: #534AB7; }
+.feat h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+.feat p {
+  font-size: 13px;
+  color: var(--ink3);
+  line-height: 1.7;
+}
+.feat.coming .feat-tag { background: var(--surface); color: var(--ink4); }
+.feat.coming h3 { color: var(--ink3); }
+
+/* BUILDER SECTION */
+.builder {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+}
+.builder-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 80px 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+.builder-text h2 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+.builder-text h2 em { font-style: italic; color: var(--accent); }
+.builder-text p {
+  font-size: 14px;
+  color: var(--ink3);
+  line-height: 1.75;
+  margin-bottom: .85rem;
+}
+.builder-text p:last-child { margin-bottom: 0; }
+.timeline-card {
+  background: var(--white);
+  border: 1px solid var(--border-strong);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.timeline-header {
+  padding: 14px 16px;
+  background: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.timeline-dot { width: 9px; height: 9px; border-radius: 50%; }
+.timeline-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  margin-left: 4px;
+  letter-spacing: 0.04em;
+}
+.tl-item {
+  display: flex;
+  gap: 14px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  align-items: flex-start;
+}
+.tl-item:last-child { border-bottom: none; }
+.tl-left { flex-shrink: 0; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.tl-circle {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+}
+.tl-circle.done { background: var(--accent-light); color: var(--accent); }
+.tl-circle.active { background: var(--ink); color: var(--white); }
+.tl-circle.todo { background: var(--surface); color: var(--ink4); }
+.tl-line { width: 1px; height: 100%; background: var(--border); flex: 1; min-height: 12px; }
+.tl-right { padding-top: 3px; }
+.tl-phase { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--ink4); margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.05em; }
+.tl-label { font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 2px; }
+.tl-label.muted { color: var(--ink3); font-weight: 400; }
+.tl-sub { font-size: 12px; color: var(--ink3); }
+
+/* WHY SECTION */
+.why {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 80px 2rem;
+}
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+}
+.why-card {
+  padding: 1.5rem 0;
+  border-top: 2px solid var(--accent-light);
+}
+.why-num {
+  font-family: 'Instrument Serif', serif;
+  font-size: 40px;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: .5rem;
+}
+.why-label {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: .4rem;
+}
+.why-sub { font-size: 13px; color: var(--ink3); line-height: 1.7; }
+
+/* CTA */
+.cta {
+  background: var(--ink);
+  padding: 80px 2rem;
+  text-align: center;
+}
+.cta h2 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 44px;
+  font-weight: 400;
+  color: var(--white);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+.cta h2 em { font-style: italic; color: var(--accent-mid); }
+.cta p { font-size: 15px; color: rgba(255,255,255,0.5); margin-bottom: 2rem; }
+.waitlist-form.dark input {
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(255,255,255,0.12);
+  color: var(--white);
+}
+.waitlist-form.dark input::placeholder { color: rgba(255,255,255,0.3); }
+.waitlist-form.dark input:focus { border-color: var(--accent-mid); }
+.waitlist-form.dark button {
+  background: var(--accent);
+}
+.waitlist-form.dark button:hover { background: var(--accent-mid); }
+.success-msg.dark {
+  background: rgba(37,169,108,0.12);
+  border-color: rgba(37,169,108,0.25);
+  color: var(--accent-mid);
+}
+
+/* FOOTER */
+footer {
+  padding: 24px 2rem;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  background: var(--ink);
+}
+.footer-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.footer-logo {
+  font-family: 'Instrument Serif', serif;
+  font-size: 17px;
+  color: rgba(255,255,255,0.6);
+}
+.footer-links { display: flex; gap: 1.5rem; }
+.footer-links a {
+  font-size: 13px;
+  color: rgba(255,255,255,0.3);
+  text-decoration: none;
+}
+.footer-links a:hover { color: rgba(255,255,255,0.6); }
+.footer-copy { font-size: 12px; color: rgba(255,255,255,0.25); }
+
+@media (max-width: 768px) {
+  .hero h1 { font-size: 40px; }
+  .waitlist-form { flex-direction: column; }
+  .builder-inner { grid-template-columns: 1fr; gap: 40px; }
+  .why-grid { grid-template-columns: 1fr; gap: 16px; }
+  .section-title { font-size: 30px; }
+  .cta h2 { font-size: 32px; }
+  .progress-track { display: none; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo"><div class="logo-dot"></div>FreelanceNG</a>
+  <div class="nav-badge">In Development</div>
+</nav>
+
+<!-- DEV STATUS BAR -->
+<div class="dev-status">
+  <div class="dev-status-inner">
+    <div class="dev-label"><div class="pulse"></div>Currently being built — early access launching soon</div>
+    <div class="progress-track">
+      <div class="phase-dot done"><div class="dot done"></div>Design</div>
+      <div class="phase-sep">›</div>
+      <div class="phase-dot active"><div class="dot active"></div>Development</div>
+      <div class="phase-sep">›</div>
+      <div class="phase-dot"><div class="dot"></div>Beta</div>
+      <div class="phase-sep">›</div>
+      <div class="phase-dot"><div class="dot"></div>Launch</div>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Coming soon &nbsp;·&nbsp; Built for Nigeria</div>
+  <h1>Win more clients on<br>Upwork &amp; Fiverr with<br><em>AI that knows your market</em></h1>
+  <p>FreelanceNG is an AI-powered toolkit built specifically for Nigerian freelancers. Write winning proposals, optimize your profile, and protect yourself with better tools — launching soon.</p>
+  <div class="waitlist-form" id="form1">
+    <input type="email" id="email1" placeholder="Enter your email address" autocomplete="email">
+    <button onclick="joinWaitlist('email1','success1','form1')">Join waitlist →</button>
+  </div>
+  <div class="success-msg" id="success1">✓ You're on the list. We'll email you when we launch.</div>
+  <p class="form-note">No spam. Unsubscribe anytime. You'll be first to know.</p>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+  <div class="section-top">
+    <div>
+      <div class="section-eyebrow">What we're building</div>
+      <div class="section-title">5 tools. One <em>focused</em> platform.</div>
+    </div>
+    <div class="section-note">For individuals only</div>
+  </div>
+  <div class="features-grid">
+    <div class="feat">
+      <div class="feat-num">01</div>
+      <div class="feat-icon-wrap core">✍️</div>
+      <div class="feat-tag core">Core feature</div>
+      <h3>Proposal Engine</h3>
+      <p>Paste any job listing and get a tailored, professional proposal in 30 seconds. Never generic. Always specific to the job.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-num">02</div>
+      <div class="feat-icon-wrap core">👤</div>
+      <div class="feat-tag core">Core feature</div>
+      <h3>Profile Optimizer</h3>
+      <p>Your Upwork or Fiverr profile scored, critiqued, and rewritten with better keywords and positioning.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-num">03</div>
+      <div class="feat-icon-wrap premium">🗺️</div>
+      <div class="feat-tag premium">Premium</div>
+      <h3>Skill Roadmap</h3>
+      <p>30/60/90 day learning plans to reach a target niche and income goal, with free resources accessible in Nigeria.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-num">04</div>
+      <div class="feat-icon-wrap premium">📋</div>
+      <div class="feat-tag premium">Premium</div>
+      <h3>Contract Reviewer</h3>
+      <p>Paste a client contract. Get a plain-English breakdown of red flags before you sign anything.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-num">05</div>
+      <div class="feat-icon-wrap premium">💬</div>
+      <div class="feat-tag premium">Premium</div>
+      <h3>Client Email Templates</h3>
+      <p>Pre-written templates for negotiating rates, handling scope creep, requesting reviews, and more.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BUILDER SECTION -->
+<section class="builder">
+  <div class="builder-inner">
+    <div class="builder-text">
+      <div class="section-eyebrow" style="margin-bottom:10px">Behind the build</div>
+      <h2>This is a product<br>being <em>built in public</em></h2>
+      <p>FreelanceNG is currently under active development. I am building this as a solo founder because I saw firsthand how Nigerian freelancers lose contracts not because of skill gaps, but because of communication and positioning gaps.</p>
+      <p>The product is currently in the development phase. The proposal engine — the core feature — is already working in a local environment. Payment integration, user accounts, and the full feature set are being built now.</p>
+      <p>Join the waitlist to follow the build and get early access when we open beta.</p>
+    </div>
+    <div class="timeline-card">
+      <div class="timeline-header">
+        <div class="timeline-dot" style="background:#FF5F57"></div>
+        <div class="timeline-dot" style="background:#FEBC2E"></div>
+        <div class="timeline-dot" style="background:#28C840"></div>
+        <div class="timeline-title">Build progress</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><div class="tl-circle done">✓</div><div class="tl-line"></div></div>
+        <div class="tl-right"><div class="tl-phase">Phase 0</div><div class="tl-label">Product design & research</div><div class="tl-sub">User interviews, feature spec, tech architecture</div></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><div class="tl-circle active">→</div><div class="tl-line"></div></div>
+        <div class="tl-right"><div class="tl-phase">Phase 1 — Current</div><div class="tl-label">Core development</div><div class="tl-sub">Proposal engine, profile optimizer, payment flow</div></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><div class="tl-circle todo">3</div><div class="tl-line"></div></div>
+        <div class="tl-right"><div class="tl-phase">Phase 2</div><div class="tl-label muted">Premium features & accounts</div><div class="tl-sub">Roadmap, contract reviewer, subscriptions</div></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><div class="tl-circle todo">4</div><div class="tl-line"></div></div>
+        <div class="tl-right"><div class="tl-phase">Phase 3</div><div class="tl-label muted">Private beta</div><div class="tl-sub">Waitlist users get first access</div></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><div class="tl-circle todo">5</div></div>
+        <div class="tl-right"><div class="tl-phase">Phase 4</div><div class="tl-label muted">Public launch</div><div class="tl-sub">Open to all Nigerian freelancers</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why">
+  <div class="section-eyebrow">The problem we're solving</div>
+  <div class="section-title" style="margin-top:10px;max-width:520px">Nigerian freelancers have the skills.<br>They just need <em>better tools</em>.</div>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-num">2M+</div>
+      <div class="why-label">Nigerian freelancers</div>
+      <div class="why-sub">Actively competing on Upwork, Fiverr, and global remote platforms with no Nigeria-specific support tools.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-num">0</div>
+      <div class="why-label">NG-specific tools</div>
+      <div class="why-sub">Every existing proposal or profile tool is built for Western markets. None understand the Nigerian freelancer context.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-num">30s</div>
+      <div class="why-label">To write a proposal</div>
+      <div class="why-sub">FreelanceNG's proposal engine turns any job listing into a tailored, professional pitch in under 30 seconds.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <h2>Be first when<br>we <em>launch</em></h2>
+  <p>Join the waitlist. We'll notify you the moment beta opens — no spam, just one email.</p>
+  <div class="waitlist-form dark" id="form2" style="justify-content:center">
+    <input type="email" id="email2" placeholder="Your email address" autocomplete="email">
+    <button onclick="joinWaitlist('email2','success2','form2')">Join waitlist →</button>
+  </div>
+  <div class="success-msg dark" id="success2">✓ You're on the list. See you at launch.</div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">FreelanceNG</div>
+    <div class="footer-links">
+      <a href="mailto:hello@freelanceng.co">Contact</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#terms">Terms</a>
+    </div>
+    <div class="footer-copy">© 2026 FreelanceNG. Currently in development. 🇳🇬</div>
+  </div>
+</footer>
+
+<script>
+function joinWaitlist(emailId, successId, formId) {
+  const input = document.getElementById(emailId);
+  const success = document.getElementById(successId);
+  const form = document.getElementById(formId);
+  const email = input.value.trim();
+  if (!email || !email.includes('@') || !email.includes('.')) {
+    input.style.borderColor = '#E24B4A';
+    setTimeout(() => input.style.borderColor = '', 1500);
+    return;
+  }
+  form.style.display = 'none';
+  success.style.display = 'block';
+  const stored = JSON.parse(localStorage.getItem('fng_waitlist') || '[]');
+  if (!stored.includes(email)) stored.push(email);
+  localStorage.setItem('fng_waitlist', JSON.stringify(stored));
+}
+document.querySelectorAll('.waitlist-form input').forEach(input => {
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      const formId = input.closest('.waitlist-form').id;
+      const num = formId.replace('form','');
+      joinWaitlist('email'+num, 'success'+num, formId);
+    }
+  });
+});
+</script>
+</body>
+</html>
